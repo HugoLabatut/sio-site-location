@@ -8,6 +8,6 @@
 
 <?php
 
-$con = new PDO("mysql:server=localhost;dbname=projet-locations", 'root', '1234');
+$con = new PDO("mysql:server=localhost;dbname=projet-locations", 'root', '');
 
 ?>
