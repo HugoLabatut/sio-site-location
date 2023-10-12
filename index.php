@@ -9,17 +9,14 @@
 -->
 
 <!DOCTYPE html>
-<html lang="fr">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
     <title>Accueil - Logérance</title>
 </head>
 
 <body>
-
+    <?php include("template/header.template.php"); ?>
 </body>
 
 </html>
