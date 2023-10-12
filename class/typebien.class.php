@@ -49,9 +49,9 @@ class Typebien
     public function insert($l)
     {
         $data = [":libtypebien" => $l];
-        $sql = "INSERT INTO typbien (lib_type_bien) VALUES (:libtypebien)";
+        $sql = "INSERT INTO typebien (lib_type_bien) VALUES (:libtypebien)";
         $stmt = $this->con->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($data);
     }
 
     public function update($id, $l)
@@ -71,6 +71,15 @@ class Typebien
         $sql = "DELETE FROM typebien WHERE id_type_bien = :idtypebien";
         $stmt = $this->con->prepare($sql);
         $stmt->execute();
+    }
+
+    public function selectById($id)
+    {
+        $data = [":idtypebien" => $id];
+        $sql = "SELECT lib_type_bien FROM typebien WHERE id_type_bien = :idtypebien";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($data);
+        return $stmt;
     }
 }
 
