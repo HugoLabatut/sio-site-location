@@ -26,7 +26,7 @@ require_once("../class/typebien.class.php");
     <?php include("../template/header.template.php"); ?>
     <main>
         <section class="conteneur" id="tableau_typebien">
-            <form action="../php/typebien.update.php" method="post">
+            <form action="../php/typebien.traitement.php" method="post">
                 <table class="tableau">
                     <thead class="tableau_entete">
                         <tr>
@@ -43,8 +43,9 @@ require_once("../class/typebien.class.php");
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                 echo "<tr>";
                                 echo "<td>", $row['id_type_bien'], "</td>";
-                                echo "<td>", $row['lib_type_bien'], "</td>";
-                                echo "<td><a class='bouton-danger' href='../php/delete/typebien.delete.php?id_type_bien=", $row['id_type_bien'], "'>Supprimer</a>  <a class='bouton-primaire' href='../php/update/typebien.update.php?id_type_bien=", $row['id_type_bien'], "'>Modifier</a></td>";
+                                echo "<td><input type='text' name='libtypebien' value='", $row['lib_type_bien'], "'></td>";
+                                echo "<td><button name='update' value='", $row['id_type_bien'], "' type=submit'>Modifier</button>
+                                <button name='delete' value='", $row['id_type_bien'], "' type=submit'>Supprimer</button></td>";
                                 echo "</tr>";
                             }
                         } else {

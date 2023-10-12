@@ -62,7 +62,7 @@ class Typebien
         ];
         $sql = "UPDATE typebien SET lib_type_bien = :libtypebien WHERE id_type_bien = :idtypebien";
         $stmt = $this->con->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($data);
     }
 
     public function delete($id)
@@ -70,7 +70,7 @@ class Typebien
         $data = [":idtypebien" => $id];
         $sql = "DELETE FROM typebien WHERE id_type_bien = :idtypebien";
         $stmt = $this->con->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($data);
     }
 
     public function selectById($id)
