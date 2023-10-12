@@ -29,11 +29,6 @@ class Typebien
         return $this->libtypebien;
     }
 
-    public function setIdTypebien($id)
-    {
-        $this->idtypebien = $id;
-    }
-
     public function setLibTypebien($l)
     {
         $this->libtypebien = $l;
