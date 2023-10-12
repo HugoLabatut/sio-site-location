@@ -20,10 +20,10 @@
     <div class="container-fluid" style="margin-top:1em">
         <div class="row">
             <div class="col-12 col-lg-2" id="formSection">
-                <!-- formulaire d'edition d'association -->
+                <!-- formulaire d'edition des clients -->
                 <form class="card" th:action="@{/sauvegardecompte}" method="post" th:if="${COMPTE_SELECTIONNEE != null}">
                     <div class="card-header">
-                        <h2 align="center" th:text="${COMPTE_SELECTIONNEE != null && COMPTE_SELECTIONNEE.nomPresent()} ? ${COMPTE_SELECTIONNEE.nom} + ' ' + ${COMPTE_SELECTIONNEE.prenom} : ''">
+                        <h2 text align="center" th:text="${COMPTE_SELECTIONNEE != null && COMPTE_SELECTIONNEE.nomPresent()} ? ${COMPTE_SELECTIONNEE.nom} + ' ' + ${COMPTE_SELECTIONNEE.prenom} : ''">
                         </h2>
                     </div>
                     <div class="card-body" id="compteForm">
@@ -45,13 +45,13 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-12 col-lg-12">
-                                <label for="nomCompte">Nom du patient *</label>
+                                <label for="nomCompte">Nom du client *</label>
                                 <input type="text" class="form-control" id="nomCompte" name="nom" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.nom} : ''">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-12 col-lg-12">
-                                <label for="prenomCompte">Prénom du patient *</label>
+                                <label for="prenomCompte">Prénom du client *</label>
                                 <input type="text" class="form-control" id="prenomCompte" name="prenom" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.prenom} : ''">
                             </div>
                         </div>
@@ -86,7 +86,7 @@
             <div class="col-12 col-lg-10" id="comptesSection">
                 <div class="card">
                     <div class="card-header">
-                        <h1 align="center">Liste des patients</h1>
+                        <h1 align="center">Liste des clients</h1>
                     </div>
                     <form th:action="@{/search}">
                         <div class="card-header">
@@ -95,7 +95,7 @@
                                     <tr>
                                         <h3>Nom / Prenom Email Téléphone</h3>
                                         <th>
-                                            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Rechercher un patient" th:value="${keyword}" required />
+                                            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Rechercher un client" th:value="${keyword}" required />
                                         </th>
                                         <th>
                                             <button type="submit" value="Search" class="btn btn-primary">Rechercher</button>
