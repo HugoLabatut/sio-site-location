@@ -23,7 +23,7 @@
                 <!-- formulaire d'edition des clients -->
                 <form class="card" th:action="@{/sauvegardecompte}" method="post" th:if="${COMPTE_SELECTIONNEE != null}">
                     <div class="card-header">
-                        <h2 text align="center" th:text="${COMPTE_SELECTIONNEE != null && COMPTE_SELECTIONNEE.nomPresent()} ? ${COMPTE_SELECTIONNEE.nom} + ' ' + ${COMPTE_SELECTIONNEE.prenom} : ''">
+                        <h2 text align="center" th:text="${COMPTE_SELECTIONNEE != null && COMPTE_SELECTIONNEE.nomclientPresent()} ? ${COMPTE_SELECTIONNEE.nom_client} + ' ' + ${COMPTE_SELECTIONNEE.prenom} : ''">
                         </h2>
                     </div>
                     <div class="card-body" id="compteForm">
@@ -45,8 +45,8 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-12 col-lg-12">
-                                <label for="nomCompte">Nom du client *</label>
-                                <input type="text" class="form-control" id="nomCompte" name="nom" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.nom} : ''">
+                                <label for="nomclientCompte">Nom du client *</label>
+                                <input type="text" class="form-control" id="nomclientCompte" name="nomclient" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.nomclient} : ''">
                             </div>
                         </div>
                         <div class="row">
@@ -106,7 +106,7 @@
                                     <tr class="list-group" style="overflow-y:auto" id="listeCompte">
                                         <th:block th:each="comptePatient : ${COMPTES}" th:field="${l}">
                                             <td class="list-group-item list-group-item-action" th:classappend="${comptePatient.selectionne} ? active : ''">
-                                                <a th:text="${comptePatient.nom}+ ' ' + ${comptePatient.prenom}" th:href="@{/listecompte(compteId=${comptePatient.idCompte})}" th:class="${comptePatient.selectionne} ? text-light : ''">
+                                                <a th:text="${comptePatient.nomclient}+ ' ' + ${comptePatient.prenom}" th:href="@{/listecompte(compteId=${comptePatient.idCompte})}" th:class="${comptePatient.selectionne} ? text-light : ''">
                                                 </a>
                                                 <a th:text="${comptePatient.email}" th:href="@{/listecompte(compteId=${comptePatient.idCompte})}" th:class="${comptePatient.selectionne} ? text-light : ''">
                                                 </a>
