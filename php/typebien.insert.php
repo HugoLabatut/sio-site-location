@@ -8,5 +8,5 @@ $oNouveauType = new Typebien($con);
 
 $oNouveauType->insert($nouveauLibTypebien);
 
-header("location:../pages/typebien.insert.php");
+header("location:../pages/typebien.pages.php");
 ?>
