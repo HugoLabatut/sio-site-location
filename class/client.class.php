@@ -87,9 +87,9 @@ class Client
         $this->prenomclient = $p;
     }
 
-    public function setAdresse($a)
+    public function setRue($rue)
     {
-        $this->adresseclient = $a;
+        $this->rueclient = $rue;
     }
 
     public function setCop($cop)
