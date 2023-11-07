@@ -14,14 +14,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css/bootstrap.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <!--<link rel="stylesheet" href="../css/style.css">-->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
 <body>
     <div th:fragment="header">
         <nav class="navbar navbar-expand-sm navbar-light bg-light" th:if="${AUTHENTIFIE}">  
-            <a class="navbar-brand mb-0 h1" th:href="@{/index.php}">Logérance</a>
+            <a class="navbar-brand mb-0 h1" th:href="@{/index.php}"><img src="../res/logo/logo-logerance.png" height="60" alt="Logo site"></a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" 
