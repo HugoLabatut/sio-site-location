@@ -23,7 +23,7 @@
                 <!-- formulaire d'edition des clients -->
                 <form class="card" th:action="@{/sauvegardecompte}" method="post" th:if="${COMPTE_SELECTIONNEE != null}">
                     <div class="card-header">
-                        <h2 text align="center" th:text="${COMPTE_SELECTIONNEE != null && COMPTE_SELECTIONNEE.nomclientPresent()} ? ${COMPTE_SELECTIONNEE.nom_client} + ' ' + ${COMPTE_SELECTIONNEE.prenom} : ''">
+                        <h2 text align="center" th:text="${COMPTE_SELECTIONNEE != null && COMPTE_SELECTIONNEE.nomclientPresent()} ? ${COMPTE_SELECTIONNEE.nomclient} + ' ' + ${COMPTE_SELECTIONNEE.prenomclient} : ''">
                         </h2>
                     </div>
                     <div class="card-body" id="compteForm">
@@ -45,20 +45,20 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-12 col-lg-12">
-                                <label for="nomclientCompte">Nom du client *</label>
-                                <input type="text" class="form-control" id="nomclientCompte" name="nomclient" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.nomclient} : ''">
+                                <label for="nomclient">Nom du client *</label>
+                                <input type="text" class="form-control" id="nomclient" name="nomclient" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.nomclient} : ''">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-12 col-lg-12">
-                                <label for="prenomCompte">Prénom du client *</label>
-                                <input type="text" class="form-control" id="prenomCompte" name="prenom" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.prenom} : ''">
+                                <label for="prenomclient">Prénom du client *</label>
+                                <input type="text" class="form-control" id="prenomclient" name="prenom" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.prenom} : ''">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-12 col-lg-12">
-                                <label for="numeroMobileCompte">Téléphone *</label>
-                                <input type="text" class="form-control" id="numeroMobileCompte" name="numeroMobile" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.numeroMobile} : ''">
+                                <label for="numeroclient">Téléphone *</label>
+                                <input type="text" class="form-control" id="numeroclient" name="numeroclient" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.numeroMobile} : ''">
                             </div>
                         </div>
                         <div class="row">
