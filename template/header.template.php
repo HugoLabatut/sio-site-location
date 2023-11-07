@@ -21,7 +21,7 @@
 <body>
     <div th:fragment="header">
         <nav class="navbar navbar-expand-sm navbar-light bg-light" th:if="${AUTHENTIFIE}">  
-            <a class="navbar-brand mb-0 h1" src="../res/logo/logérance-logo.png" th:href="@{/main}">Logérance</a>
+            <a class="navbar-brand mb-0 h1" th:href="@{/index.php}">Logérance</a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" 
@@ -38,7 +38,7 @@
                         <a class="dropdown-item" th:href="#">Création d'un utilisateur</a>
                         <a class="dropdown-item" th:href="#">Modifier mon compte</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="#">Liste des patient</a>
+                        <a class="dropdown-item" th:href="@{listeCompte.php}">Liste des comptes</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" th:href="#">Déconnexion</a>
                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modalSupAccount">
