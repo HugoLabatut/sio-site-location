@@ -17,6 +17,9 @@
 
 <body>
     <?php include("template/header.template.php"); ?>
+    <main>
+        <!--test-->
+    </main>
 </body>
 
 </html>
