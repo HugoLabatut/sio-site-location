@@ -38,7 +38,9 @@ class Typebien
     {
         $sql = "SELECT * FROM typebien";
         $stmt = $this->con->query($sql);
-        return $stmt;
+        $row = $stmt->fetchall(PDO::FETCH_ASSOC);
+        var_dump($row);
+        return $row;
     }
 
     public function insert($l)
@@ -74,7 +76,8 @@ class Typebien
         $sql = "SELECT lib_type_bien FROM typebien WHERE id_type_bien = :idtypebien";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
-        return $stmt;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
     }
 }
 

@@ -44,18 +44,17 @@ require_once("../class/typebien.class.php");
                                 <tbody class="tableau_corps">
                                     <?php
                                     $oTypes = new Typebien($con);
-                                    $result = $oTypes->select();
-                                    if ($result->rowCount() > 0) {
-                                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                            echo "<tr>";
-                                            echo "<th scope='row'>", $row['id_type_bien'], "</th>";
-                                            echo "<td><input class='form-control' type='text' name='libtypebien' value='", $row['lib_type_bien'], "'></td>";
-                                            echo "<td><button class='btn btn-primary' name='update' value='", $row['id_type_bien'], "' type=submit'>Modifier</button>
-                                <button class='btn btn-danger name='delete' value='", $row['id_type_bien'], "' type=submit'>Supprimer</button></td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "<p>Aucun résultat trouvé.</p>";
+                                    $lesTypes = $oTypes->select();
+                                    foreach ($lesTypes as $unType) {
+                                        $idt = $unType['id_type_bien'];
+                                        $nomt = 'libtypebien' . $idt;
+
+                                        echo "<tr>";
+                                        echo "<th scope='row' name='idtypebien' id='idtypebien'>", $unType['id_type_bien'], "</th>";
+                                        echo "<td><input class='form-control' type='text' name='", $nomt, "' value='", $unType['lib_type_bien'], "'></td>";
+                                        echo "<td><button class='btn btn-primary' name='update' value='", $unType['id_type_bien'], "' type=submit'>Modifier</button>
+                                                    <button class='btn btn-danger' name='delete' value='", $unType['id_type_bien'], "' type=submit'>Supprimer</button></td>";
+                                        echo "</tr>";
                                     }
                                     ?>
                                 </tbody>

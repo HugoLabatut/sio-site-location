@@ -50,8 +50,8 @@ require_once("../class/typebien.class.php");
                                             echo "<tr>";
                                             echo "<th scope='row'>", $row['id_type_bien'], "</th>";
                                             echo "<td><input class='form-control' type='text' name='libtypebien' value='", $row['lib_type_bien'], "'></td>";
-                                            echo "<td><button class='btn btn-primary' name='update' value='", $row['id_type_bien'], "' type=submit'>Modifier</button>
-                                <button class='btn btn-danger name='delete' value='", $row['id_type_bien'], "' type=submit'>Supprimer</button></td>";
+                                            echo "<td><button class='btn btn-primary' name='update' id='update' value='", $row['id_type_bien'], "' type=submit'>Modifier</button>
+                                <button class='btn btn-danger name='delete' id='delete' value='", $row['id_type_bien'], "' type=submit'>Supprimer</button></td>";
                                             echo "</tr>";
                                         }
                                     } else {
