@@ -39,7 +39,7 @@ class Typebien
         $sql = "SELECT * FROM typebien";
         $stmt = $this->con->query($sql);
         $row = $stmt->fetchall(PDO::FETCH_ASSOC);
-        var_dump($row);
+        // var_dump($row);
         return $row;
     }
 

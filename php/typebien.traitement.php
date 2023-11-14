@@ -30,21 +30,13 @@ foreach ($lesTypesBien as $unType) {
             $nouvIdTBien = $_POST['update'];
             $oTypeBien->update($nouvIdTBien, $nouvLibTBien);
         }
+    } elseif (isset($_POST['delete'])) {
+        if($idt == $_POST['delete']) {
+            $delIdTBien = $_POST['delete'];
+            $oTypeBien->delete($delIdTBien);
+        }
     }
 }
 
 header('location:../pages/typebien.pages.php');
-
-/*
-if (isset($_POST['update'])) {
-    $libtbien = $_POST['libtypebien'];
-    $idtbien = $_POST['update'];
-    $oTypeBien->update($idtbien, $libtbien);
-    header("location:../pages/typebien.pages.php");
-} elseif (isset($_POST['delete'])) {
-    $idtbien = $_POST['delete'];
-    $oTypeBien->delete($idtbien);
-    header("location:../pages/typebien.pages.php");
-}
-*/
 ?>
