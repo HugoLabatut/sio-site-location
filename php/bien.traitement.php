@@ -10,26 +10,20 @@
 require_once("../include/pdo.inc.php");
 require_once("../class/bien.class.php");
 
+var_dump($_POST['update']);
+// var_dump($_POST['delete']);
+var_dump($_POST['nombien4']);
+var_dump($_POST['ruebien4']);
+var_dump($_POST['copbien4']);
+var_dump($_POST['vilbien4']);
+var_dump($_POST['supbien4']);
+var_dump($_POST['coubien4']);
+var_dump($_POST['chabien4']);
+var_dump($_POST['desbien4']);
+var_dump($_POST['refbien4']);
+var_dump($_POST['statbien4']);
+var_dump($_POST['typebien4']);
+
 $oBien = new Bien($con);
 
-if (isset($_POST['update'])) {
-    $nombien = $_POST['nombien'];
-    $ruebien = $_POST['ruebien'];
-    $cpbien = $_POST['cpbien'];
-    $villebien = $_POST['villebien'];
-    $supbien = $_POST['supbien'];
-    $nbcouchbien = $_POST['nbcouchbien'];
-    $nbchambbien = $_POST['nbchambbien'];
-    $descbien = $_POST['descbien'];
-    $refbien = $_POST['refbien'];
-    $statbien = $_POST['statbien'];
-    $idbien = $_POST['update'];
-    $idtbien = $_POST['idtbien'];
-    $oBien->update($idbien, $nombien, $ruebien, $cpbien, $villebien, $supbien, $nbcouchbien, $nbchambbien, $descbien, $refbien, $statbien, $idtbien);
-    header("location:../pages/bien.pages.php");
-} elseif (isset($_POST['delete'])) {
-    $idbien = $_POST['delete'];
-    $oBien->delete($idbien);
-    header("location:../pages/bien.pages.php");
-}
 ?>
