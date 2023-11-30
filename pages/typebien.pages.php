@@ -48,7 +48,6 @@ require_once("../class/typebien.class.php");
                                     foreach ($lesTypes as $unType) {
                                         $idt = $unType['id_type_bien'];
                                         $nomt = 'libtypebien' . $idt;
-                                        // var_dump($nomt);
                                         echo "<tr>";
                                         echo "<th scope='row' name='idtypebien' id='idtypebien'>", $unType['id_type_bien'], "</th>";
                                         echo "<td><input class='form-control' type='text' name='", $nomt, "' value='", $unType['lib_type_bien'], "'></td>";

@@ -102,18 +102,16 @@ class Reservation
         return $stmt;
     }
 
-    public function insert($dd, $df, $cr, $mr, $ar, $idb, $idc)
+    public function insert($dd, $df, $cr, $idb, $idc)
     {
         $data = [
             ":datedeb" => $dd,
             ":datefin" => $df,
             ":comresa" => $cr,
-            ":modresa" => $mr,
-            ":annresa" => $ar,
             ":idbien" => $idb,
             ":idclient" => $idc
         ];
-        $sql = "INSERT INTO reservation (date_debut_reservation, date_fin_reservation, commentaire_reservation, moderation_reservation, annulation_reservation, id_bien, id_client) VALUES (:datedeb, :datefin, :comresa, :modresa, :annresa, :idbien, :idclient)";
+        $sql = "INSERT INTO reservation (date_debut_reservation, date_fin_reservation, commentaire_reservation, id_bien, id_client) VALUES (:datedeb, :datefin, :comresa, :modresa, :annresa, :idbien, :idclient)";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }

@@ -11,6 +11,7 @@
 require_once("../include/pdo.inc.php");
 require_once("../class/bien.class.php");
 require_once("../class/typebien.class.php");
+require_once("../class/communes.class.php");
 include("../template/header.template.php");
 ?>
 
@@ -59,23 +60,29 @@ include("../template/header.template.php");
                                     <?php
                                     $oBiens = new Bien($con);
                                     $oTypes = new Typebien($con);
+                                    $oCommunes = new Communes($con);
                                     $lesTypes = $oTypes->select();
                                     $lesBiens = $oBiens->select();
+                                    $lesCommunes = $oCommunes->select();
                                     // var_dump($lesIdTypes);
                                     foreach ($lesBiens as $unBien) {
                                         echo "<tr>";
                                         echo "<th scope='row' name='idbien' id='idbien'>", $unBien['id_bien'], "</th>";
                                         echo "<td>", $unBien['nom_bien'], "</td>";
                                         echo "<td>", $unBien['rue_bien'], "</td>";
-                                        echo "<td>", $unBien['cop_bien'], "</td>";
-                                        echo "<td>", $unBien['ville_bien'], "</td>";
+                                        foreach ($lesCommunes as $uneCommune) {
+                                            if ($unBien['id_commune'] == $uneCommune['id_commune']) {
+                                                echo "<td>", $uneCommune['code_commune'], "</td>";
+                                                echo "<td>", $uneCommune['libelle_commune'], "</td>";
+                                            }
+                                        }
                                         echo "<td>", $unBien['superficie_bien'], "</td>";
                                         echo "<td>", $unBien['nombre_couchage_bien'], "</td>";
                                         echo "<td>", $unBien['nombre_chambre_bien'], "</td>";
                                         echo "<td>", $unBien['descriptif_bien'], "</td>";
                                         echo "<td>", $unBien['reference_bien'], "</td>";
                                         echo "<td>";
-                                        if ($unBien['statue_bien'] == 0) {
+                                        if ($unBien['statut_bien'] == 0) {
                                             echo "Libre";
                                         } else {
                                             echo "Occupé";
@@ -121,7 +128,7 @@ include("../template/header.template.php");
                             </div>
                             <div class="mb-3">
                                 <label for="vilbien" class="form-label">Superficie (en m²) : </label>
-                                <input type="text" name="vilbien" id="vilbien" class="form-control">
+                                <input type="text" name="supbien" id="supbien" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="coubien" class="form-label">Nombre de couchage(s) : </label>

@@ -140,7 +140,7 @@ class Bien
 
     public function select()
     {
-        $sql = "SELECT * FROM bien";
+        $sql = "SELECT * FROM bien WHERE valid_bien = 1";
         $stmt = $this->con->query($sql);
         return $stmt;
     }
@@ -157,10 +157,10 @@ class Bien
             ":nbchambrebien" => $ncha,
             ":descriptifbien" => $desc,
             ":referencebien" => $ref,
-            ":statuebien" => $stat,
+            ":statutbien" => $stat,
             ":idtypebien" => $idtb
         ];
-        $sql = "INSERT INTO bien (nom_bien, rue_bien, cop_bien, ville_bien, superficie_bien, nombre_couchage_bien, nombre_chambre_bien, descriptif_bien, reference_bien, statue_bien, id_type_bien) VALUES (:nombien, :ruebien, :copbien, :villebien, :superficiebien, :nbcouchagebien, :nbchambrebien, :descriptifbien, :referencebien, :statuebien, :idtypebien)";
+        $sql = "INSERT INTO bien (nom_bien, rue_bien, cop_bien, ville_bien, superficie_bien, nombre_couchage_bien, nombre_chambre_bien, descriptif_bien, reference_bien, statut_bien, id_type_bien) VALUES (:nombien, :ruebien, :copbien, :villebien, :superficiebien, :nbcouchagebien, :nbchambrebien, :descriptifbien, :referencebien, :statutbien, :idtypebien)";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }
@@ -189,7 +189,7 @@ class Bien
     public function delete($id)
     {
         $data = [":idbien" => $id];
-        $sql = "DELETE FROM bien WHERE id_bien = :idbien";
+        $sql = "UPDATE bien SET valid_bien = 0 WHERE id_bien = :idbien";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }

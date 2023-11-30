@@ -2,11 +2,11 @@
 require_once("../include/pdo.inc.php");
 require_once("../class/bien.class.php");
 require_once("../class/typebien.class.php");
+require_once("../class/communes.class.php");
+require_once("../class/photo.class.php");
 require_once('../template/header.template.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -21,18 +21,24 @@ require_once('../template/header.template.php');
     <div class="container" style="margin-top: 2rem;" id="fiche_bien">
         <div class="row">
             <div class="col" id="tableau_bien">
-                <form class="card" action="../pages/unbien.pages.php" method="post">
+                <form class="card" action="../php/bien.update.php" enctype="multipart/form-data" method="post">
                     <div class="card-header">
                         <h2>Modifier un bien</h2>
                     </div>
                     <div class="card-body">
                         <?php
-                        // var_dump($_POST['update']);
                         $oBien = new Bien($con);
-                        $lesBiens = $oBien->select();
                         $oType = new Typebien($con);
+                        $oCommune = new Communes($con);
+                        $oPhotos = new Photo($con);
+                        $lesBiens = $oBien->select();
                         $lesTypes = $oType->select();
+                        $lesCommunes = $oCommune->select();
+                        $lesPhotos = $oPhotos->select();
                         $idBien = $_POST['update'];
+                        if ($idBien == NULL) {
+                            echo "<h3>Aucune donnée n'a été selectionnée.</h3>";
+                        }
                         foreach ($lesBiens as $unBien) {
                             if ($unBien['id_bien'] == $idBien) {
                                 echo "<div class='form-group row'>
@@ -47,16 +53,21 @@ require_once('../template/header.template.php');
                                 <label for='ruebien'>Rue :</label>
                                 <input class='form-control' id='ruebien' name='ruebien' type='text' value='", $unBien['rue_bien'], "'>
                                 </div>
-                                <div class='col'>
-                                <label for='cpbien'>Code postal :</label>
-                                <input class='form-control' maxlength='5' onkeyup='autocomplet_commune()' id='cpbien' name='cpbien' type='text' value='", $unBien['cop_bien'], "'>
-                                </div>
-                                <div class='col'>
-                                <label for='vilbien'>Ville :</label>
-                                <input class='form-control' id='vilbien' onkeyup='autocomplet_commune()' name='vilbien' type='text' value='", $unBien['ville_bien'], "'>
-                                <ul class='list-group' id='listecommunes'></ul>
-                                </div>
-                                </div>";
+                                <div class='col'>";
+
+                                foreach ($lesCommunes as $uneCommune) {
+                                    if ($unBien['id_commune'] == $uneCommune['id_commune']) {
+                                        echo "<label for='cpbien'>Code postal :</label>
+                                        <input class='form-control' maxlength='5' onkeyup='autocomplet_commune()' id='cpbien' name='cpbien' type='text' value='", $uneCommune['code_commune'], "'>
+                                        </div>
+                                        <div class='col'>
+                                        <label for='vilbien'>Ville :</label>
+                                        <input class='form-control' id='vilbien' onkeyup='autocomplet_commune()' name='vilbien' type='text' value='", $uneCommune['libelle_commune'], "'>
+                                        <ul class='list-group' id='listecommunes'></ul>
+                                        </div>
+                                        </div>";
+                                    }
+                                }
 
                                 echo "<div class='form-group row'>
                                 <div class='col'>
@@ -89,7 +100,7 @@ require_once('../template/header.template.php');
                                 <label for='statbien'>Statut :</label>
                                 <select name='statbien' id='statbien' class='form-control'>
                                 ";
-                                if ($unBien['statue_bien'] == 0) {
+                                if ($unBien['statut_bien'] == 0) {
                                     echo "<option class='form-control' value='libre'>Libre</option>
                                     <option class='form-control' value='occupe'>Occupé</option>";
                                 } else {
@@ -108,14 +119,31 @@ require_once('../template/header.template.php');
                                 }
                                 echo "</div>
                                 </div>";
+
+                                echo "<div class='form-group row'>
+                                <div class='col'>
+                                <label for='photosbienactuelles'>Photos du bien :</label><br>";
+                                foreach ($lesPhotos as $unePhoto) {
+                                    echo "<img src='", $unePhoto['lien_photo'], "' width='150'>";
+                                }
+                                echo "</div>
+                                </div>";
+
+                                echo "<div class='form-group row'>
+                                <div class='col'>
+                                <label for='newphotosbien'>Ajouter de nouvelles photos :</label>
+                                <input type='file' accept='.png, .jpg, .jpeg' name='photobien' id='photobien' class='form-control'><br>
+                                <button type='submit' name='update_photo' value='", $unBien['id_bien'], "' class='btn btn-primary btn-sm'>Ajouter une photo</button>
+                                </div>
+                                </div>
+                                </div>";
+
+                                echo "<div class='card-footer'>
+                                <button type='submit' name='update' value='", $unBien['id_bien'], "' class='btn btn-primary'>Modifier le bien</button>
+                                </div>";
                             }
                         }
                         ?>
-                        
-                    </div>
-                    <div class="card-footer">
-                        <input type="submit" value="Modifier le bien" class="btn btn-primary">
-                    </div>
                 </form>
             </div>
         </div>
