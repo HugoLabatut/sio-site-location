@@ -145,13 +145,12 @@ class Bien
         return $stmt;
     }
 
-    public function insert($n, $r, $cp, $v, $sup, $ncou, $ncha, $desc, $ref, $stat, $idtb)
+    public function insert($n, $r, $idc, $sup, $ncou, $ncha, $desc, $ref, $stat, $idtb)
     {
         $data = [
             ":nombien" => $n,
             ":ruebien" => $r,
-            ":copbien" => $cp,
-            ":villebien" => $v,
+            ":idcommune" => $idc,
             ":superficiebien" => $sup,
             ":nbcouchagebien" => $ncou,
             ":nbchambrebien" => $ncha,
@@ -160,7 +159,7 @@ class Bien
             ":statutbien" => $stat,
             ":idtypebien" => $idtb
         ];
-        $sql = "INSERT INTO bien (nom_bien, rue_bien, cop_bien, ville_bien, superficie_bien, nombre_couchage_bien, nombre_chambre_bien, descriptif_bien, reference_bien, statut_bien, id_type_bien) VALUES (:nombien, :ruebien, :copbien, :villebien, :superficiebien, :nbcouchagebien, :nbchambrebien, :descriptifbien, :referencebien, :statutbien, :idtypebien)";
+        $sql = "INSERT INTO bien (nom_bien, rue_bien, id_commune, superficie_bien, nombre_couchage_bien, nombre_chambre_bien, descriptif_bien, reference_bien, statut_bien, id_type_bien) VALUES (:nombien, :ruebien, :idcommune, :superficiebien, :nbcouchagebien, :nbchambrebien, :descriptifbien, :referencebien, :statutbien, :idtypebien)";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }

@@ -72,6 +72,8 @@ include("../template/header.template.php");
                                         echo "<td>", $unBien['rue_bien'], "</td>";
                                         foreach ($lesCommunes as $uneCommune) {
                                             if ($unBien['id_commune'] == $uneCommune['id_commune']) {
+                                                var_dump($uneCommune['code_commune']);
+                                                var_dump($uneCommune['libelle_commune']);
                                                 echo "<td>", $uneCommune['code_commune'], "</td>";
                                                 echo "<td>", $uneCommune['libelle_commune'], "</td>";
                                             }
@@ -127,6 +129,9 @@ include("../template/header.template.php");
                                 <input type="text" name="vilbien" id="vilbien" class="form-control">
                             </div>
                             <div class="mb-3">
+                                <input type="text" name="idcommune" id="idcommune" class="form-control" hidden>
+                            </div>
+                            <div class="mb-3">
                                 <label for="vilbien" class="form-label">Superficie (en m²) : </label>
                                 <input type="text" name="supbien" id="supbien" class="form-control">
                             </div>
@@ -159,6 +164,9 @@ include("../template/header.template.php");
                                 <input type="text" onkeyup="autocomplet_tbien()" name="typebien" id="typebien"
                                     class="form-control">
                                 <ul class="list-group" id="libtypesbien"></ul>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="idtbien" id="idtbien" class="form-control" hidden>
                             </div>
                         </div>
                         <div class="card-footer">
