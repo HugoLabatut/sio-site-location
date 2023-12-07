@@ -1,97 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Connexion</title>
-    <meta charset="utf-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #C6D3F3;
-            text-align: center;
-        }
-
-        .container {
-            width: 300px;
-            margin: 0 auto;
-            padding-top: 100px;
-        }
-
-        input[type="email"],
-        input[type="password"] {
-            box-shadow: 3px 3px 5px 0 rgba(0,0,0,0.3);
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            box-sizing: border-box; /* pour inclure le padding et border dans la largeur totale */
-        }
-
-        input[type="submit"],
-        input[type="button"] {
-            box-shadow: 3px 3px 5px 0 rgba(0,0,0,0.3);
-            width: 100%;
-            padding: 10px;
-            background-color: #6F7BD9;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 6px;
-        }
-
-        h2 {
-            font-size: 96%;
-            color: #333;
-            text-align: center;
-            margin-top: 6%;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion</title>
 </head>
 <body>
+
 <?php
 session_start();
 
-// Vérifiez si le formulaire a été soumis
+
+// Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Inclure la configuration de la base de données et établir la connexion PDO
-    include("config.php");
+    // Inclure le fichier de configuration de la base de données
+    require_once "config2.php";
 
     // Récupérer les données du formulaire
-    $mail = $_POST["mail"];
+    $username = $_POST["username"];
     $password = $_POST["password"];
 
-    // Requête SQL pour récupérer l'utilisateur avec l'adresse e-mail fournie
-    $query = "SELECT * FROM client WHERE mail_client = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$mail]);
+    // Préparer la requête SQL
+    $sql = "SELECT * FROM clients WHERE email = ? AND password = ?";
+    
+    // Utiliser des requêtes préparées pour éviter les injections SQL
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$email, $password]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Vérifier si l'utilisateur existe et si le mot de passe correspond
-    if ($user && password_verify($password, $user["password_client"])) {
-        // Connexion réussie, redirigez l'utilisateur vers la page d'accueil ou autre
-        $_SESSION["user_id"] = $user["id_client"]; // Stockez l'ID de l'utilisateur dans la session par exemple
-        header("Location: accueil.php");
+    // Vérifier si l'utilisateur existe dans la base de données
+    if ($user) {
+        // Enregistrez l'ID de l'utilisateur dans la session
+        $_SESSION['user_id'] = $user['id'];
+
+        // Rediriger vers le tableau de bord ou une autre page sécurisée
+        header("Location: inscription.pages.php");
         exit();
     } else {
-        // Échec de la connexion, affichez un message d'erreur par exemple
         echo "Identifiants incorrects. Veuillez réessayer.";
     }
 }
 ?>
-<div class="container">
-    <h2>Connexion</h2>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <input type="email" name="mail" placeholder="Votre Email" required><br>
-        <input type="password" name="password" placeholder="Mot de passe" required><br>
-        <input type="submit" value="Se connecter"> <br> <br>
-        <input type="button" id="loginbutton" value="Pas de compte ? Créez en un juste ici !"> <br> <br>
-    </form>
-    <a class="link" href="Reinitialisation.html"> Mot de passe oublié ? Réinitialiser le ici !</a>
-</div>
-<script>
-    document.getElementById("loginbutton").addEventListener("click", function() {
-    // Rediriger l'utilisateur vers la page "inscription.pages.php"
-    window.location.href = "inscription.pages.php";
-});
-</script>
+
+<h2>Connexion</h2>
+<form method="post" action="">
+    <label for="username">Votre mail:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">Mot de passe:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <input type="submit" value="Se connecter">
+</form>
+
 </body>
 </html>
