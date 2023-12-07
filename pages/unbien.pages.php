@@ -124,7 +124,9 @@ require_once('../template/header.template.php');
                                 <div class='col'>
                                 <label for='photosbienactuelles'>Photos du bien :</label><br>";
                                 foreach ($lesPhotos as $unePhoto) {
-                                    echo "<img src='", $unePhoto['lien_photo'], "' width='150'>";
+                                    if ($unePhoto['id_bien'] == $unBien['id_bien']) {
+                                        echo "<img src='", $unePhoto['lien_photo'], "' width='150'>";
+                                    }
                                 }
                                 echo "</div>
                                 </div>";

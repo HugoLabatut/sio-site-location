@@ -6,7 +6,7 @@
 ========= Créateur : HLt
 -->
 
-<?php 
+<?php
 
 class Communes
 {
@@ -152,13 +152,24 @@ class Communes
         return $stmt;
     }
 
-    public function selectById($id)
+    public function selectLibById($id)
     {
         $data = [":idcom" => $id];
         $sql = "SELECT libelle_commune FROM communes WHERE id_commune = :idcom";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
-        return $stmt;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['libelle_commune'];
+    }
+
+    public function selectCodeById($id)
+    {
+        $data = [":idcom" => $id];
+        $sql = "SELECT code_commune FROM communes WHERE id_commune = :idcom";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($data);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['code_commune'];
     }
 }
 

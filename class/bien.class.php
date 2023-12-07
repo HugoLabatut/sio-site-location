@@ -7,6 +7,9 @@
 -->
 
 <?php
+
+include('communes.class.php');
+
 class Bien
 {
     private $con;
@@ -86,6 +89,20 @@ class Bien
     public function getIdTypebien()
     {
         return $this->idbien;
+    }
+
+    public function getLibCommune($idc)
+    {
+        $oCommune = new Communes($this->con);
+        $libCom = $oCommune->selectLibById($idc);
+        return $libCom;
+    }
+
+    public function getCodeCommune($idc)
+    {
+        $oCommune = new Communes($this->con);
+        $libCom = $oCommune->selectCodeById($idc);
+        return $libCom;
     }
 
     public function setRue($r)
@@ -177,10 +194,10 @@ class Bien
             ":nbchambrebien" => $ncha,
             ":descriptifbien" => $desc,
             ":referencebien" => $ref,
-            ":statuebien" => $stat,
+            ":statutbien" => $stat,
             ":idtypebien" => $idtb
         ];
-        $sql = "UPDATE bien SET nom_bien = :nombien, rue_bien = :ruebien, cop_bien = :copbien, ville_bien = :villebien, superficie_bien = :superficiebien, nombre_couchage_bien = :nbcouchagebien, nombre_chambre_bien = :nbchambrebien, descriptif_bien = :descripftifbien, reference_bien = :referencebien, statue_bien = :statuebien, id_type_bien = :idtypebien WHERE id_bien = :idbien";
+        $sql = "UPDATE bien SET nom_bien = :nombien, rue_bien = :ruebien, cop_bien = :copbien, ville_bien = :villebien, superficie_bien = :superficiebien, nombre_couchage_bien = :nbcouchagebien, nombre_chambre_bien = :nbchambrebien, descriptif_bien = :descripftifbien, reference_bien = :referencebien, statut_bien = :statutbien, id_type_bien = :idtypebien WHERE id_bien = :idbien";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }

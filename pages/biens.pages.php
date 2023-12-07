@@ -60,24 +60,15 @@ include("../template/header.template.php");
                                     <?php
                                     $oBiens = new Bien($con);
                                     $oTypes = new Typebien($con);
-                                    $oCommunes = new Communes($con);
                                     $lesTypes = $oTypes->select();
                                     $lesBiens = $oBiens->select();
-                                    $lesCommunes = $oCommunes->select();
-                                    // var_dump($lesIdTypes);
                                     foreach ($lesBiens as $unBien) {
                                         echo "<tr>";
                                         echo "<th scope='row' name='idbien' id='idbien'>", $unBien['id_bien'], "</th>";
                                         echo "<td>", $unBien['nom_bien'], "</td>";
                                         echo "<td>", $unBien['rue_bien'], "</td>";
-                                        foreach ($lesCommunes as $uneCommune) {
-                                            if ($unBien['id_commune'] == $uneCommune['id_commune']) {
-                                                var_dump($uneCommune['code_commune']);
-                                                var_dump($uneCommune['libelle_commune']);
-                                                echo "<td>", $uneCommune['code_commune'], "</td>";
-                                                echo "<td>", $uneCommune['libelle_commune'], "</td>";
-                                            }
-                                        }
+                                        echo "<td>", $oBiens->getCodeCommune($unBien['id_commune']), "</td>";
+                                        echo "<td>", $oBiens->getLibCommune($unBien['id_commune']), "</td>";
                                         echo "<td>", $unBien['superficie_bien'], "</td>";
                                         echo "<td>", $unBien['nombre_couchage_bien'], "</td>";
                                         echo "<td>", $unBien['nombre_chambre_bien'], "</td>";
