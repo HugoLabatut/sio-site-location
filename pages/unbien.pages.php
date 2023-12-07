@@ -21,7 +21,7 @@ require_once('../template/header.template.php');
     <div class="container" style="margin-top: 2rem;" id="fiche_bien">
         <div class="row">
             <div class="col" id="tableau_bien">
-                <form class="card" action="../php/bien.update.php" enctype="multipart/form-data" method="post">
+                <form class="card" action="../php/bien.traitement.php" enctype="multipart/form-data" method="post">
                     <div class="card-header">
                         <h2>Modifier un bien</h2>
                     </div>
@@ -124,7 +124,9 @@ require_once('../template/header.template.php');
                                 <div class='col'>
                                 <label for='photosbienactuelles'>Photos du bien :</label><br>";
                                 foreach ($lesPhotos as $unePhoto) {
-                                    echo "<img src='", $unePhoto['lien_photo'], "' width='150'>";
+                                    if ($unePhoto['id_bien'] == $unBien['id_bien']) {
+                                        echo "<img src='", $unePhoto['lien_photo'], "' width='150'>";
+                                    }
                                 }
                                 echo "</div>
                                 </div>";

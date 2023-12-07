@@ -27,7 +27,7 @@ if (isset($_POST['update'])) {
 
     $oBien = new Bien($con);
 
-    // $oBien->update($idb, $nomb, $rueb, $cpb, $vilb, $supb, $coub, $chab, $desb, $refb, $statb, $typeb);
+    $oBien->update($idb, $nomb, $rueb, $cpb, $vilb, $supb, $coub, $chab, $desb, $refb, $statb, $typeb);
 } elseif (isset($_POST['update_photo'])) {
     $idb = $_POST['update_photo'];
     $unePhotoNom = $_FILES['photobien']['name'];
@@ -38,7 +38,7 @@ if (isset($_POST['update'])) {
     $lienPhoto = "../res/img/" . $unePhotoNom;
     $oPhoto = new Photo($con);
     $oPhoto->insert($unePhotoNom, $lienPhoto, $idb);
-    header('location:../pages/biens.pages.php');
+    header('location:../pages/unbien.pages.php');
 }
 
 ?>

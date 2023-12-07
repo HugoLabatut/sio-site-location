@@ -18,10 +18,11 @@ function autocomplet_commune() {
 }
 
 // Lors du choix dans la liste
-function set_item_commune(item, item2) {
+function set_item_commune(item, item2, item3) {
     // change input value
     $('#cpbien').val(item);
     $('#vilbien').val(item2);
+    $('#idcommune').val(item3);
     // hide proposition list
     $('#listecommunes').hide();
 }

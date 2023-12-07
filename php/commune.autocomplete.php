@@ -16,6 +16,6 @@ foreach ($list as $res) {
     //  affichage
     $nom_list_id = str_replace($_POST['keyword'], '<b>' . $_POST['keyword'] . '</b>', $res['code_commune'] . ' ' . $res['libelle_commune']);
     // sélection 
-    echo '<li class="list-group-item" onclick="set_item_commune(\'' . str_replace("'", "\'", $res['code_commune']) . '\',\'' . str_replace("'", "\'", $res['libelle_commune']) . '\')">' . $nom_list_id . '</li>';
+    echo '<li class="list-group-item" onclick="set_item_commune(\'' . str_replace("'", "\'", $res['code_commune']) . '\',\'' . str_replace("'", "\'", $res['libelle_commune']) . '\',\'' . str_replace("'", "\'", $res['id_commune']) . '\')">' . $nom_list_id . '</li>';
 }
 ?>
