@@ -66,7 +66,7 @@ require_once('../template/header.template.php');
                                         <ul class='list-group' id='listecommunes'></ul>
                                         </div>
                                         </div>
-                                        <input type='text' value='", $uneCommune['id_commune'],"' name='idcommune' id='idcommune' class='form-control' hidden>";
+                                        <input type='text' value='", $uneCommune['id_commune'], "' name='idcommune' id='idcommune' class='form-control' hidden>";
                                     }
                                 }
 
@@ -116,7 +116,7 @@ require_once('../template/header.template.php');
                                     if ($unBien['id_type_bien'] == $unType['id_type_bien']) {
                                         echo "<input class='form-control' onkeyup='autocomplet_tbien()' id='typebien' name='typebien' type='text' value='", $unType['lib_type_bien'], "'>
                                         <ul class='list-group' id='libtypesbien'></ul>
-                                        <input type='text' value='", $unBien['id_type_bien'] ,"' name='idtbien' id='idtbien' class='form-control' hidden>";
+                                        <input type='text' value='", $unBien['id_type_bien'], "' name='idtbien' id='idtbien' class='form-control' hidden>";
                                     }
                                 }
                                 echo "</div>

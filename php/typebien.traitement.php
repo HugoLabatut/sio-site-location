@@ -31,7 +31,7 @@ foreach ($lesTypesBien as $unType) {
             $oTypeBien->update($nouvIdTBien, $nouvLibTBien);
         }
     } elseif (isset($_POST['delete'])) {
-        if($idt == $_POST['delete']) {
+        if ($idt == $_POST['delete']) {
             $delIdTBien = $_POST['delete'];
             $oTypeBien->delete($delIdTBien);
         }

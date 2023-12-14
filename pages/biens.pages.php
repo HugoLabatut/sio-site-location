@@ -96,7 +96,8 @@ include("../template/header.template.php");
                     </form>
                 </div>
                 <div class="col-12 col-lg-2" id="formulaire_bien">
-                    <form class="card" action="../php/bien.insert.php" method="post" class="card">
+                    <form class="card" action="../php/bien.insert.php" method="post"
+                        class="card">
                         <div class="card-header">
                             <h4>Ajouter un bien</h4>
                         </div>

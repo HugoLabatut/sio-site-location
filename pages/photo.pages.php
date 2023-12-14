@@ -50,8 +50,8 @@ require_once("../class/photo.class.php");
                                         $nomp = 'nomphoto' . $idp;
                                         echo "<tr>";
                                         echo "<th scope='row' name='idtypebien' id='idtypebien'>", $unePhoto['id_photo'], "</th>";
-                                        echo "<td><a href='", $unePhoto['lien_photo'] ,"'>", $unePhoto['nom_photo'],"</td>";
-                                        echo "<td><img src='", $unePhoto['lien_photo'] ,"' width='100'></td>";
+                                        echo "<td><a href='", $unePhoto['lien_photo'], "'>", $unePhoto['nom_photo'], "</td>";
+                                        echo "<td><img src='", $unePhoto['lien_photo'], "' width='100'></td>";
                                         echo "</tr>";
                                     }
                                     ?>
