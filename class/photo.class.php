@@ -103,8 +103,8 @@ class Photo
         $sql = "SELECT nom_photo, lien_photo FROM photo WHERE id_photo = :idphoto";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
-        return $stmt;
-    }
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }  
 }
 
 ?>
