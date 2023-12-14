@@ -41,7 +41,7 @@ if (isset($_POST['update'])) {
     var_dump($unePhotoNom);
     var_dump($unePhotoTemp);
     move_uploaded_file($unePhotoTemp, '../res/img/' . $unePhotoNom);
-    $lienPhoto = "../res/img/" . $unePhotoNom;
+    $lienPhoto = "res/img/" . $unePhotoNom;
     $oPhoto = new Photo($con);
     $oPhoto->insert($unePhotoNom, $lienPhoto, $idb);
     header('location:../pages/biens.pages.php');
