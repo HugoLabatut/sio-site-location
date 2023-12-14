@@ -181,23 +181,25 @@ class Bien
         $stmt->execute($data);
     }
 
-    public function update($id, $n, $r, $cp, $v, $sup, $ncou, $ncha, $desc, $ref, $stat, $idtb)
+    public function update($id, $n, $r, $idc, $sup, $ncou, $ncha, $desc, $ref, $stat, $idtb)
     {
         $data = [
             ":idbien" => $id,
             ":nombien" => $n,
             ":ruebien" => $r,
-            ":copbien" => $cp,
-            ":villebien" => $v,
+
+            ":idcommune" => $idc,
             ":superficiebien" => $sup,
             ":nbcouchagebien" => $ncou,
+
             ":nbchambrebien" => $ncha,
             ":descriptifbien" => $desc,
             ":referencebien" => $ref,
+
             ":statutbien" => $stat,
             ":idtypebien" => $idtb
         ];
-        $sql = "UPDATE bien SET nom_bien = :nombien, rue_bien = :ruebien, cop_bien = :copbien, ville_bien = :villebien, superficie_bien = :superficiebien, nombre_couchage_bien = :nbcouchagebien, nombre_chambre_bien = :nbchambrebien, descriptif_bien = :descripftifbien, reference_bien = :referencebien, statut_bien = :statutbien, id_type_bien = :idtypebien WHERE id_bien = :idbien";
+        $sql = "UPDATE bien SET nom_bien = :nombien, rue_bien = :ruebien, id_commune = :idcommune, superficie_bien = :superficiebien, nombre_couchage_bien = :nbcouchagebien, nombre_chambre_bien = :nbchambrebien, descriptif_bien = :descriptifbien, reference_bien = :referencebien, statut_bien = :statutbien, id_type_bien = :idtypebien WHERE id_bien = :idbien";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }

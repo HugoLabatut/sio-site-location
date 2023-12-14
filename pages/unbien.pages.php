@@ -44,7 +44,7 @@ require_once('../template/header.template.php');
                                 echo "<div class='form-group row'>
                                 <div class='col'>
                                 <label for='nombien'>Bien concerné :</label>
-                                <input class='form-control' id='nombien' name='nombien' type='text' value='", $unBien['nom_bien'], "'>
+                                <input class='form-control' id='nombien' name='nombien' type='text' value='", $unBien["nom_bien"], "'>
                                 </div>
                                 </div>";
 
@@ -65,7 +65,8 @@ require_once('../template/header.template.php');
                                         <input class='form-control' id='vilbien' onkeyup='autocomplet_commune()' name='vilbien' type='text' value='", $uneCommune['libelle_commune'], "'>
                                         <ul class='list-group' id='listecommunes'></ul>
                                         </div>
-                                        </div>";
+                                        </div>
+                                        <input type='text' value='", $uneCommune['id_commune'],"' name='idcommune' id='idcommune' class='form-control' hidden>";
                                     }
                                 }
 
@@ -114,7 +115,8 @@ require_once('../template/header.template.php');
                                 foreach ($lesTypes as $unType) {
                                     if ($unBien['id_type_bien'] == $unType['id_type_bien']) {
                                         echo "<input class='form-control' onkeyup='autocomplet_tbien()' id='typebien' name='typebien' type='text' value='", $unType['lib_type_bien'], "'>
-                                        <ul class='list-group' id='libtypesbien'></ul>";
+                                        <ul class='list-group' id='libtypesbien'></ul>
+                                        <input type='text' value='", $unBien['id_type_bien'] ,"' name='idtbien' id='idtbien' class='form-control' hidden>";
                                     }
                                 }
                                 echo "</div>
