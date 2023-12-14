@@ -1,126 +1,136 @@
 <!-- 
 ========= Site location
-========= typebien.pages.php
-========= Liste les types de biens
-========= Date création : 07 nov. 2023
+========= client.pages.php
+========= Liste les clients
+========= Date création : 12 oct. 2023
 ========= Créateur : HLt
 -->
 
+<?php
+
+require_once("../include/pdo.inc.php");
+require_once("../class/client.class.php");
+
+?>
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="fr">
 
 <head>
-    <title>Accueil - Logérance</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Clients - Logérance</title>
 </head>
 
 <body>
     <?php include("../template/header.template.php"); ?>
-    <div class="container-fluid" style="margin-top:1em">
-        <div class="row">
-            <div class="col-12 col-lg-2" id="formSection">
-                <!-- formulaire d'edition des clients -->
-                <form class="card" th:action="@{/sauvegardecompte}" method="post" th:if="${COMPTE_SELECTIONNEE != null}">
-                    <div class="card-header">
-                        <h2 text align="center" th:text="${COMPTE_SELECTIONNEE != null && COMPTE_SELECTIONNEE.nomclientPresent()} ? ${COMPTE_SELECTIONNEE.nomclient} + ' ' + ${COMPTE_SELECTIONNEE.prenomclient} : ''">
-                        </h2>
-                    </div>
-                    <div class="card-body" id="compteForm">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <div class="alert alert-info" role="alert" th:if="${ENREGISTREMENT_OK}">
-                                        L'enregistrement s'est bien effectué
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <div class="alert alert-danger" role="alert" th:if="${MSG_ERREUR != null}" th:text="${MSG_ERREUR}"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12 col-lg-12">
-                                <label for="nomclient">Nom du client *</label>
-                                <input type="text" class="form-control" id="nomclient" name="nomclient" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.nomclient} : ''">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12 col-lg-12">
-                                <label for="prenomclient">Prénom du client *</label>
-                                <input type="text" class="form-control" id="prenomclient" name="prenom" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.prenom} : ''">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12 col-lg-12">
-                                <label for="numeroclient">Téléphone *</label>
-                                <input type="text" class="form-control" id="numeroclient" name="numeroclient" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.numeroMobile} : ''">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12 col-lg-12">
-                                <label for="emailCompte">Adresse mail *</label>
-                                <input type="text" class="form-control" id="emailCompte" name="email" autocomplete="off" th:value="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.email} : ''">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="sessionBloquee" id="compteActif" name="sessionBloquee" style="width:15px;height:15px" th:checked="${COMPTE_SELECTIONNEE != null} ? ${COMPTE_SELECTIONNEE.isSessionBloquee()} : false">
-                                    <label class="form-check-label" for="compteActif">
-                                        Utilisateur bloqué
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-12 col-lg-10" id="comptesSection">
-                <div class="card">
-                    <div class="card-header">
-                        <h1 align="center">Liste des clients</h1>
-                    </div>
-                    <form th:action="@{/search}">
+    <main>
+        <div class="container-fluid" style="margin-top: 2rem;" id="tableau_clients">
+            <div class="row">
+                <div class="col-12 col-lg-10" id="tableau_clients">
+                    <form class="card" action="../php/client.traitement.php" method="post">
                         <div class="card-header">
-                            <table>
-                                <thead>
+                            <h2>Liste des clients</h2>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead class="table">
                                     <tr>
-                                        <h3>Nom / Prenom Email Téléphone</h3>
-                                        <th>
-                                            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Rechercher un client" th:value="${keyword}" required />
-                                        </th>
-                                        <th>
-                                            <button type="submit" value="Search" class="btn btn-primary">Rechercher</button>
-                                        </th>
+                                        <th scope="col">ID Client</th>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Prénom</th>
+                                        <th scope="col">Rue</th>
+                                        <th scope="col">Code postal</th>
+                                        <th scope="col">Ville</th>
+                                        <th scope="col">E-mail</th>
+                                        <th scope="col">Statut</th>
+                                        <th scope="col">Valide</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr class="list-group" style="overflow-y:auto" id="listeCompte">
-                                        <th:block th:each="comptePatient : ${COMPTES}" th:field="${l}">
-                                            <td class="list-group-item list-group-item-action" th:classappend="${comptePatient.selectionne} ? active : ''">
-                                                <a th:text="${comptePatient.nomclient}+ ' ' + ${comptePatient.prenom}" th:href="@{/listecompte(compteId=${comptePatient.idCompte})}" th:class="${comptePatient.selectionne} ? text-light : ''">
-                                                </a>
-                                                <a th:text="${comptePatient.email}" th:href="@{/listecompte(compteId=${comptePatient.idCompte})}" th:class="${comptePatient.selectionne} ? text-light : ''">
-                                                </a>
-                                                <a th:text="${comptePatient.numeroMobile}" th:href="@{/listecompte(compteId=${comptePatient.idCompte})}" th:class="${comptePatient.selectionne} ? text-light : ''">
-                                                </a>
-                                            </td>
-                                        </th:block>
-                                    </tr>
+                                <tbody class="tableau_corps">
+                                    <?php
+                                    $oClients = new Client($con);
+                                    $lesClients = $oClients->select();
+                                    foreach ($lesClients as $unClient) {
+                                        $idClient = $unClient['id_client'];
+                                        $nomClient = 'nomClient' . $idClient;
+                                        $prenomClient = 'prenomClient' . $idClient;
+                                        $rueClient = 'rueClient' . $idClient;
+                                        $codePostalClient = 'codePostalClient' . $idClient;
+                                        $villeClient = 'villeClient' . $idClient;
+                                        $emailClient = 'emailClient' . $idClient;
+                                        $statueClient = 'statueClient' . $idClient;
+                                        $validClient = 'validClient' . $idClient;
+
+                                        echo "<tr>";
+                                        echo "<th scope='row' name='idClient' id='idClient'>", $unClient['id_client'], "</th>";
+                                        echo "<td><input class='form-control' type='text' name='", $nomClient, "' value='", $unClient['nom_client'], "'></td>";
+                                        echo "<td><input class='form-control' type='text' name='", $prenomClient, "' value='", $unClient['prenom_client'], "'></td>";
+                                        echo "<td><input class='form-control' type='text' name='", $rueClient, "' value='", $unClient['rue_client'], "'></td>";
+                                        echo "<td><input class='form-control' type='tex' name='", $codePostalClient, "' value='", $unClient['cop_client'], "'></td>";
+                                        echo "<td><input class='form-control' type='text' name='", $villeClient, "' value='", $unClient['ville_client'], "'></td>";
+                                        echo "<td><input class='form-control' type='text' name='", $emailClient, "' value='", $unClient['mail_client'], "'></td>";
+                                        echo "<td><input class='form-control' type='text' name='", $statueClient, "' value='", $unClient['statue_client'], "'></td>";
+                                        echo "<td><input class='form-control' type='text' name='", $validClient, "' value='", $unClient['valid_client'], "'></td>";
+                                        echo "<td><button class='btn btn-primary' name='update' value='", $unClient['id_client'], "' type=submit'>Modifier</button>
+                                                    <button class='btn btn-danger' name='delete' value='", $unClient['id_client'], "' type=submit'>Supprimer</button></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
                     </form>
                 </div>
+                <div class="col-12 col-lg-2" id="formulaire_clients">
+                    <form class="card" action="../php/client.insert.php" method="post" class="card">
+                        <div class="card-header">
+                            <h4>Ajouter un client</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="nomClient" class="form-label">Nom : </label>
+                                <input type="text" name="nomClient" id="nomClient" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="prenomClient" class="form-label">Prénom : </label>
+                                <input type="text" name="prenomClient" id="prenomClient" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="rueClient" class="form-label">Rue : </label>
+                                <input type="text" name="rueClient" id="rueClient" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="codePostalClient" class="form-label">Code postal : </label>
+                                <input type="number" name="codePostalClient" id="codePostalClient" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="villeClient" class="form-label">Ville : </label>
+                                <input type="text" name="villeClient" id="villeClient" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailClient" class="form-label">E-mail : </label>
+                                <input type="text" name="emailClient" id="emailClient" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="statueClient" class="form-label">Statut : </label>
+                                <input type="text" name="statueClient" id="statueClient" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="ValideClient" class="form-label">Valide : </label>
+                                <input type="text" name="validClient" id="validClient" class="form-control">
+                            </div>
+                            <!-- Ajoutez ici les champs supplémentaires nécessaires -->
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit" value="Ajouter un client" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>
