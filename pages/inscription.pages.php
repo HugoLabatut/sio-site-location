@@ -39,7 +39,7 @@
         }
 
         input[type="submit"] {
-            margin-bottom: 20px; /* Ajout de marge pour correspondre au style du deuxième formulaire */
+            margin-bottom: 20px;
         }
 
         #villeAutocomplete {
@@ -66,7 +66,6 @@
 <?php
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Inclure la configuration de la base de données et établir la connexion PDO
     include("config.php");
 
     // Récupérer les données du formulaire
@@ -76,16 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $codePostal = $_POST["code_postal"];
     $ville = $_POST["ville"];
     $mail = $_POST["mail"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hachage du mot de passe
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-    // Préparer la requête SQL d'insertion
     $query = "INSERT INTO client (nom_client, prenom_client, rue_client, cop_client, ville_client, mail_client, password_client, statue_client, valid_client) VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0)";
 
-    // Exécuter la requête préparée
     $stmt = $pdo->prepare($query);
     $stmt->execute([$nom, $prenom, $rue, $codePostal, $ville, $mail, $password]);
 
-    // Afficher un message de succès
     echo "Inscription réussie !";
 }
 ?>
@@ -115,14 +111,13 @@ function registerUser() {
     var password2 = document.getElementById("password2").value;
     var passwordError = document.getElementById("passwordError");
 
-    // Vérification des règles de sécurité du mot de passe
     var passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{12,}$/;
 
     if (!passwordPattern.test(password)) {
         passwordError.textContent = "Le mot de passe ne respecte pas les règles de sécurité. Le mot de passe doit être composé d'au moins 12 caractères, de majuscules, minuscules, caractères spéciaux ainsi que des chiffres.";
         return false;
     } else {
-        passwordError.textContent = ""; // Efface les messages d'erreur précédents
+        passwordError.textContent = ""; 
     }
 
     if (password !== password2) {
@@ -130,11 +125,10 @@ function registerUser() {
         return false;
     }
 
-    return true; // Soumission du formulaire si toutes les vérifications passent
+    return true; 
 }
 
 document.getElementById("loginButton").addEventListener("click", function() {
-    // Rediriger l'utilisateur vers la page "connexion.pages.php"
     window.location.href = "connexion.pages.php";
 });
 </script>

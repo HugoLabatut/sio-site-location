@@ -3,55 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de Connexion</title>
+    <title>Connexion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #C6D3F3;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding-top: 5%;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.3);
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+
+        input[type="submit"],
+        input[type="button"] {
+            box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.3);
+            width: 100%;
+            padding: 10px;
+            background-color: #6F7BD9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        input[type="submit"] {
+            margin-bottom: 20px;
+        }
+
+        #villeAutocomplete {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+
+        #villeAutocomplete div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #villeAutocomplete div:hover {
+            background-color: #e9e9e9;
+        }
+    </style>
 </head>
 <body>
 
 <?php
-session_start();
-
-
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Inclure le fichier de configuration de la base de données
-    require_once "config2.php";
+    include("config.php");
 
-    // Récupérer les données du formulaire
-    $username = $_POST["username"];
+    $mail = $_POST["mail"];
     $password = $_POST["password"];
 
-    // Préparer la requête SQL
-    $sql = "SELECT * FROM clients WHERE email = ? AND password = ?";
-    
-    // Utiliser des requêtes préparées pour éviter les injections SQL
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$email, $password]);
+    // Préparer la requête SQL de vérification
+    $query = "SELECT * FROM client WHERE mail_client = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$mail]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Vérifier si l'utilisateur existe dans la base de données
-    if ($user) {
-        // Enregistrez l'ID de l'utilisateur dans la session
-        $_SESSION['user_id'] = $user['id'];
+    // Avant la vérification if ($user && password_verify($password, $user['password_client'])) {
+echo "Mot de passe saisi : " . $password . "<br>";
+echo "Mot de passe haché dans la base de données : " . $user['password_client'] . "<br>";
+echo "Résultat de password_verify : " . var_export(password_verify($password, $user['password_client']), true) . "<br>";
 
-        // Rediriger vers le tableau de bord ou une autre page sécurisée
-        header("Location: inscription.pages.php");
-        exit();
+
+    if ($user && password_verify($password, $user['password_client'])) {
+        echo "Connexion réussie !";
     } else {
         echo "Identifiants incorrects. Veuillez réessayer.";
     }
 }
 ?>
 
-<h2>Connexion</h2>
-<form method="post" action="">
-    <label for="username">Votre mail:</label>
-    <input type="text" id="username" name="username" required><br>
-
-    <label for="password">Mot de passe:</label>
-    <input type="password" id="password" name="password" required><br>
-
-    <input type="submit" value="Se connecter">
-</form>
-
-</body>
-</html>
+<div class="container">
+    <h2>Connexion</h2>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <input type="email" name="mail" placeholder="Votre Email" required><br>
+        <input type="password" name="password" placeholder="Votre Mot de passe" required><br>
+        <input type="submit" value="Se connecter">
+    </form>
+    <p>Vous n'avez pas de compte ? <a href="inscription.pages.php">Inscrivez-vous ici</a>.</p>
+</div>
