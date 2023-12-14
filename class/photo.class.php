@@ -100,7 +100,7 @@ class Photo
     public function selectById($id)
     {
         $data = [":idphoto" => $id];
-        $sql = "SELECT nom_photo FROM photo WHERE id_photo = :idphoto";
+        $sql = "SELECT nom_photo, lien_photo FROM photo WHERE id_photo = :idphoto";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
         return $stmt;
