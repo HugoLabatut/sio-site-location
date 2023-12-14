@@ -28,7 +28,11 @@ var_dump($refb);
 var_dump($statb);
 var_dump($tbien);
 
-$oNouveauBien->insert($nomb, $rueb, $idcom, $supb, $coub, $chab, $desb, $refb, $statb, $tbien);
+if ($statb == "Libre") {
+    $oNouveauBien->insert($nomb, $rueb, $idcom, $supb, $coub, $chab, $desb, $refb, '0', $tbien);
+} else {
+    $oNouveauBien->insert($nomb, $rueb, $idcom, $supb, $coub, $chab, $desb, $refb, '1', $tbien);
+}
 
 header("location:../pages/biens.pages.php");
 ?>
