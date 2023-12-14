@@ -39,7 +39,6 @@ class Typebien
         $sql = "SELECT * FROM typebien";
         $stmt = $this->con->query($sql);
         $row = $stmt->fetchall(PDO::FETCH_ASSOC);
-        // var_dump($row);
         return $row;
     }
 
@@ -77,6 +76,16 @@ class Typebien
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    public function selectByName($lib)
+    {
+        $data = [":libtypebien" => $lib];
+        $sql = "SELECT id_type_bien FROM typebien WHERE lib_type_bien = :libtypebien";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($data);
+        $row = $stmt->fecth(PDO::FETCH_ASSOC);
         return $row;
     }
 }
