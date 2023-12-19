@@ -59,8 +59,6 @@ include("../template/header.template.php");
                                 <tbody class="tableau_corps">
                                     <?php
                                     $oBiens = new Bien($con);
-                                    $oTypes = new Typebien($con);
-                                    $lesTypes = $oTypes->select();
                                     $lesBiens = $oBiens->select();
                                     foreach ($lesBiens as $unBien) {
                                         echo "<tr>";
@@ -81,11 +79,7 @@ include("../template/header.template.php");
                                             echo "Occupé";
                                         }
                                         echo "</td>";
-                                        foreach ($lesTypes as $unType) {
-                                            if ($unBien['id_type_bien'] == $unType['id_type_bien']) {
-                                                echo "<td>", $unType['lib_type_bien'], "</td>";
-                                            }
-                                        }
+                                        echo "<td>", $oBiens->getLibTB($unBien['id_type_bien']), "</td>";
                                         echo "<td><button class='btn btn-primary' name='update' value='", $unBien['id_bien'], "' type=submit'>Modifier</button><button class='btn btn-danger' name='delete' value='", $unBien['id_bien'], "' type=submit'>Supprimer</button></td>";
                                         echo "</tr>";
                                     }

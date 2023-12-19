@@ -32,12 +32,12 @@
                         th:text="${USER_NAME != null ? USER_NAME : 'Connecté'}">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" th:href="test">Modifier une association</a>
-                        <a class="dropdown-item" th:href="#">Création d'un utilisateur</a>
+                        <a class="dropdown-item" th:href="@{/pages/biens.pages.php}">Création d'un bien</a>
                         <a class="dropdown-item" th:href="#">Modifier mon compte</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{listeCompte.php}">Liste des comptes</a>
+                        <a class="dropdown-item" th:href="@{/pages/biens.pages.php}">Liste des biens</a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/pages/connexion.pages.php}">Connexion</a>
                         <a class="dropdown-item" th:href="#">Déconnexion</a>
                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modalSupAccount">
                             Suppression de vôtre compte

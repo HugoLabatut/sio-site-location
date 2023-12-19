@@ -97,7 +97,7 @@ class Reservation
 
     public function select()
     {
-        $sql = "SELECT * FROM reservation";
+        $sql = "SELECT * FROM calender_reservation";
         $stmt = $this->con->query($sql);
         return $stmt;
     }
@@ -111,7 +111,7 @@ class Reservation
             ":idbien" => $idb,
             ":idclient" => $idc
         ];
-        $sql = "INSERT INTO reservation (date_debut_reservation, date_fin_reservation, commentaire_reservation, id_bien, id_client) VALUES (:datedeb, :datefin, :comresa, :modresa, :annresa, :idbien, :idclient)";
+        $sql = "INSERT INTO calender_reservation (date_debut_reservation, date_fin_reservation, commentaire_reservation, id_bien, id_client) VALUES (:datedeb, :datefin, :comresa, :modresa, :annresa, :idbien, :idclient)";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }
@@ -128,7 +128,7 @@ class Reservation
             ":idbien" => $idb,
             ":idclient" => $idc
         ];
-        $sql = "UPDATE reservation SET id_reservation = :idresa, date_debut_reservation = :datedeb, date_fin_reservation = :datefin, commentaire_reservation = :comresa, moderation_reservation = :modresa, annulation_reservation = :annresa, id_bien = :idbien, id_client = :idclient WHERE id_reservation = :idresa";
+        $sql = "UPDATE calender_reservation SET id_reservation = :idresa, date_debut_reservation = :datedeb, date_fin_reservation = :datefin, commentaire_reservation = :comresa, moderation_reservation = :modresa, annulation_reservation = :annresa, id_bien = :idbien, id_client = :idclient WHERE id_reservation = :idresa";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }
@@ -136,7 +136,7 @@ class Reservation
     public function delete($id)
     {
         $data = [":idresa" => $id];
-        $sql = "DELETE FROM reservation WHERE id_reservation = :idresa";
+        $sql = "DELETE FROM calender_reservation WHERE id_reservation = :idresa";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
     }
@@ -144,7 +144,7 @@ class Reservation
     public function selectById($id)
     {
         $data = [":idresa" => $id];
-        $sql = "SELECT date_debut_reservation, date_fin_reservation, commentaire_reservation, moderation_reservation, annulation_reservation, id_bien, id_client FROM reservation WHERE id_reservation = :idresa";
+        $sql = "SELECT date_debut_reservation, date_fin_reservation, commentaire_reservation, moderation_reservation, annulation_reservation, id_bien, id_client FROM calender_reservation WHERE id_reservation = :idresa";
         $stmt = $this->con->prepare($sql);
         $stmt->execute($data);
         return $stmt;

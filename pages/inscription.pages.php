@@ -18,7 +18,7 @@ include('../template/header.template.php');
     <?php
     // Vérifier si le formulaire a été soumis
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        include("../include/pdo.inc.php");
+        include("../php/pdo.inc.php");
 
         // Récupérer les données du formulaire
         $nom = $_POST["nom"];
@@ -29,9 +29,9 @@ include('../template/header.template.php');
         $mail = $_POST["mail"];
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO client (nom_client, prenom_client, rue_client, cop_client, ville_client, mail_client, password_client, statue_client, valid_client) VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0)";
+        $query = "INSERT INTO client (nom_client, prenom_client, rue_client, cop_client, ville_client, mail_client, password_client, statue_client, valid_client, role_client) VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, 'User')";
 
-        $stmt = $con->prepare($query);
+        $stmt = $pdo->prepare($query);
         $stmt->execute([$nom, $prenom, $rue, $codePostal, $ville, $mail, $password]);
 
         echo "Inscription réussie !";
@@ -42,30 +42,28 @@ include('../template/header.template.php');
 
     <div class="container">
         <div class="card">
-            <h2 class='card-header'>Inscription</h2>
-            <form class='card-body' method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+            <h2 class="card-header">Inscription</h2>
+            <form class="card-body" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
                 onsubmit="return registerUser()">
-                <input class='form-control' type="text" name="nom" placeholder="Votre Nom" required><br>
-                <input class='form-control' type="text" name="prenom" placeholder="Votre Prénom" required><br>
-                <input class='form-control' type="text" name="rue" placeholder="Votre Adresse" required><br>
-                <input class='form-control' type="text" name="code_postal" id="codePostal" oninput="autocompleteVille()"
+                <input class="form-control" type="text" name="nom" placeholder="Votre Nom" required><br>
+                <input class="form-control" type="text" name="prenom" placeholder="Votre Prénom" required><br>
+                <input class="form-control" type="text" name="rue" placeholder="Votre Adresse" required><br>
+                <input class="form-control" type="text" name="code_postal" id="codePostal" oninput="autocompleteVille()"
                     placeholder="Votre Code Postal" required><br>
-                <input class='form-control' type="text" name="ville" id="ville" placeholder="Votre Ville" required>
+                <input class="form-control" type="text" name="ville" id="ville" placeholder="Votre Ville" required>
                 <div id="villeAutocomplete"></div>
                 <br>
-                <input class='form-control' type="email" name="mail" placeholder="Votre Email" required><br>
-                <input class='form-control' type="password" name="password" id="password"
+                <input class="form-control" type="email" name="mail" placeholder="Votre Email" required><br>
+                <input class="form-control" type="password" name="password" id="password"
                     placeholder="Votre Mot de passe" required><br>
-                <input class='form-control' type="password" id="password2"
+                <input class="form-control" type="password" id="password2"
                     placeholder="Veuillez ressaisir votre Mot de passe" required>
                 <div id="passwordError" style="color: red;"></div>
                 <br>
-                <input class="form-control btn btn-primary" type="submit" value="Créer le compte">
+                <input class="btn btn-primary" type="submit" value="Créer le compte">
+                <br><br>
+                <input type="button" id="loginButton" value="Déjà inscrit ? Identifiez-vous ici !">
             </form>
-            <div class="card-footer">
-                <input class='btn btn-primary' type="button" id="loginButton"
-                    value="Déjà inscrit ? Identifiez-vous ici !">
-            </div>
         </div>
     </div>
 

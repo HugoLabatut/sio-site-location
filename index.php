@@ -40,7 +40,7 @@ $typesbiens = $typebien->select();
                 <!-- Votre formulaire pour sélectionner un type de bien -->
                 <div class="col-lg-2 d-none d-lg-block">
                     <form method="post">
-                        <div id="main-container">
+                        <div class="card" id="main-container">
                             <div class="card-header">
                                 <h2>Type de bien. </h2>
                             </div>

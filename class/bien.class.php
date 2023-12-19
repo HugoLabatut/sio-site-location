@@ -9,6 +9,7 @@
 <?php
 
 include('communes.class.php');
+include('typebien.class.php');
 
 class Bien
 {
@@ -103,6 +104,13 @@ class Bien
         $oCommune = new Communes($this->con);
         $libCom = $oCommune->selectCodeById($idc);
         return $libCom;
+    }
+
+    public function getLibTB($idtb)
+    {
+        $oType = new Typebien($this->con);
+        $libTB = $oType->selectLibById($idtb);
+        return $libTB;
     }
 
     public function setRue($r)

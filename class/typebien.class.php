@@ -88,6 +88,16 @@ class Typebien
         $row = $stmt->fecth(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    public function selectLibById($id)
+    {
+        $data = [":idtb" => $id];
+        $sql = "SELECT lib_type_bien FROM typebien WHERE id_type_bien = :idtb";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($data);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['lib_type_bien'];
+    }
 }
 
 ?>
