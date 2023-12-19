@@ -8,6 +8,8 @@
 
 <?php
 
+// Inclure fichiers des classes pour encapsulation
+
 include('communes.class.php');
 include('typebien.class.php');
 
