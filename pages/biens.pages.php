@@ -33,7 +33,7 @@ include("../template/header.template.php");
         <div class="container-fluid" style="margin-top: 2rem;" id="tableau_bien">
             <div class="row">
                 <div class="col-12 col-lg-10" id="tableau_bien">
-                    <form class="card" action="../pages/unbien.pages.php" method="post">
+                    <form class="card" action="../php/bien.traitement.php" method="post">
                         <div class="card-header">
                             <h2>Liste des biens</h2>
                         </div>
@@ -80,7 +80,7 @@ include("../template/header.template.php");
                                         }
                                         echo "</td>";
                                         echo "<td>", $oBiens->getLibTB($unBien['id_type_bien']), "</td>";
-                                        echo "<td><button class='btn btn-primary' name='update' value='", $unBien['id_bien'], "' type=submit'>Modifier</button><button class='btn btn-danger' name='delete' value='", $unBien['id_bien'], "' type=submit'>Supprimer</button></td>";
+                                        echo "<td><button class='btn btn-primary' name='gounbien' value='", $unBien['id_bien'], "' type=submit'>Modifier</button><button class='btn btn-danger' name='delete' value='", $unBien['id_bien'], "' type=submit'>Supprimer</button></td>";
                                         echo "</tr>";
                                     }
                                     ?>
@@ -90,7 +90,7 @@ include("../template/header.template.php");
                     </form>
                 </div>
                 <div class="col-12 col-lg-2" id="formulaire_bien">
-                    <form class="card" action="../php/bien.insert.php" method="post"
+                    <form class="card" action="../php/bien.traitement.php" method="post"
                         class="card">
                         <div class="card-header">
                             <h4>Ajouter un bien</h4>
@@ -156,7 +156,7 @@ include("../template/header.template.php");
                             </div>
                         </div>
                         <div class="card-footer">
-                            <input type="submit" value="Ajouter un bien" class="btn btn-primary">
+                            <input type="submit" name="insert" value="Ajouter un bien" class="btn btn-primary">
                         </div>
                     </form>
                 </div>

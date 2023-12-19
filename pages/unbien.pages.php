@@ -19,7 +19,8 @@ require_once('../template/header.template.php');
 
 <body>
     <div class="container" style="margin-top: 2rem;" id="fiche_bien">
-        <div class="row">
+    <a class="btn btn-danger" href="biens.pages.php">Retour à la page des biens</a>
+        <div style="margin-top: 1rem" class="row">
             <div class="col" id="tableau_bien">
                 <form class="card" action="../php/bien.traitement.php" enctype="multipart/form-data" method="post">
                     <div class="card-header">
@@ -35,7 +36,7 @@ require_once('../template/header.template.php');
                         $lesTypes = $oType->select();
                         $lesCommunes = $oCommune->select();
                         $lesPhotos = $oPhotos->select();
-                        $idBien = $_POST['update'];
+                        $idBien = $_GET['idBien'];
                         if ($idBien == NULL) {
                             echo "<h3>Aucune donnée n'a été selectionnée.</h3>";
                         }
@@ -55,20 +56,18 @@ require_once('../template/header.template.php');
                                 </div>
                                 <div class='col'>";
 
-                                foreach ($lesCommunes as $uneCommune) {
-                                    if ($unBien['id_commune'] == $uneCommune['id_commune']) {
-                                        echo "<label for='cpbien'>Code postal :</label>
-                                        <input class='form-control' maxlength='5' onkeyup='autocomplet_commune()' id='cpbien' name='cpbien' type='text' value='", $uneCommune['code_commune'], "'>
-                                        </div>
-                                        <div class='col'>
-                                        <label for='vilbien'>Ville :</label>
-                                        <input class='form-control' id='vilbien' onkeyup='autocomplet_commune()' name='vilbien' type='text' value='", $uneCommune['libelle_commune'], "'>
-                                        <ul class='list-group' id='listecommunes'></ul>
-                                        </div>
-                                        </div>
-                                        <input type='text' value='", $uneCommune['id_commune'], "' name='idcommune' id='idcommune' class='form-control' hidden>";
-                                    }
-                                }
+
+                                echo "<label for='cpbien'>Code postal :</label>
+                                <input class='form-control' maxlength='5' onkeyup='autocomplet_commune()' id='cpbien' name='cpbien' type='text' value='", $oBien->getCodeCommune($unBien['id_commune']), "'>
+                                </div>
+                                <div class='col'>
+                                <label for='vilbien'>Ville :</label>
+                                <input class='form-control' id='vilbien' onkeyup='autocomplet_commune()' name='vilbien' type='text' value='", $oBien->getLibCommune($unBien['id_commune']), "'>
+                                <ul class='list-group' id='listecommunes'></ul>
+                                </div>
+                                </div>
+                                <input type='text' value='", $oBien->getIdCommune($unBien['id_commune']), "' name='idcommune' id='idcommune' class='form-control' hidden>";
+
 
                                 echo "<div class='form-group row'>
                                 <div class='col'>
@@ -112,13 +111,9 @@ require_once('../template/header.template.php');
                                 </div>
                                 <div class='col'>
                                 <label for='typebien'>Type :</label>";
-                                foreach ($lesTypes as $unType) {
-                                    if ($unBien['id_type_bien'] == $unType['id_type_bien']) {
-                                        echo "<input class='form-control' onkeyup='autocomplet_tbien()' id='typebien' name='typebien' type='text' value='", $unType['lib_type_bien'], "'>
-                                        <ul class='list-group' id='libtypesbien'></ul>
-                                        <input type='text' value='", $unBien['id_type_bien'], "' name='idtbien' id='idtbien' class='form-control' hidden>";
-                                    }
-                                }
+                                echo "<input class='form-control' onkeyup='autocomplet_tbien()' id='typebien' name='typebien' type='text' value='", $oBien->getLibTB($unBien['id_type_bien']), "'>
+                                <ul class='list-group' id='libtypesbien'></ul>
+                                <input type='text' value='", $unBien['id_type_bien'], "' name='idtbien' id='idtbien' class='form-control' hidden>";
                                 echo "</div>
                                 </div>";
 

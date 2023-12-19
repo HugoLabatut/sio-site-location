@@ -108,11 +108,25 @@ class Bien
         return $libCom;
     }
 
+    public function getIdCommune($idc)
+    {
+        $oCommune = new Communes($this->con);
+        $idCom = $oCommune->selectId($idc);
+        return $idCom;
+    }
+
     public function getLibTB($idtb)
     {
         $oType = new Typebien($this->con);
         $libTB = $oType->selectLibById($idtb);
         return $libTB;
+    }
+
+    public function getIdTB($idtb)
+    {
+        $oType = new Typebien($this->con);
+        $idTB = $oType->selectId($idtb);
+        return $idTB;
     }
 
     public function setRue($r)

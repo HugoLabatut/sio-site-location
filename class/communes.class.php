@@ -171,6 +171,16 @@ class Communes
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['code_commune'];
     }
+
+    public function selectId($id)
+    {
+        $data = [":idcom" => $id];
+        $sql = "SELECT id_commune FROM communes WHERE id_commune = :idcom";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($data);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['id_commune'];
+    }
 }
 
 ?>
