@@ -29,12 +29,8 @@ require_once('../template/header.template.php');
                     <div class="card-body">
                         <?php
                         $oBien = new Bien($con);
-                        $oType = new Typebien($con);
-                        $oCommune = new Communes($con);
                         $oPhotos = new Photo($con);
                         $lesBiens = $oBien->select();
-                        $lesTypes = $oType->select();
-                        $lesCommunes = $oCommune->select();
                         $lesPhotos = $oPhotos->select();
                         $idBien = $_GET['idBien'];
                         if ($idBien == NULL) {
